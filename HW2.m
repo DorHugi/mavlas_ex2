@@ -76,21 +76,49 @@ figure(f2);
 subplot(2,3,2);
 
 
-lineContainsSingal = xSpectralMat(lineContainsT,:);
-length(lineContainsSingal)
+lineContainsSingal = x(1+(lineContainsT-1)*N:1+(lineContainsT-1)*N + N);
 
-lineContainsSingal128 = lineContainsSingal(N/2-128/2:N/2+128/2-1);
+
+lineContainsSingal128 = lineContainsSingal(N/2-128/2+1:N/2+128/2);
+lineContainsSingal128(1:10)
 lx6 = length(lineContainsSingal128);
 x_lineContainsSingal128 = linspace(0,FS1/2,lx6/2);
-x_lineContainsSingal128Fft = fft(x_lineContainsSingal128);
+
+x_lineContainsSingal128DbAbsFft = db(abs(fft(lineContainsSingal128)));
 subplot(2,3,2);
-plot(x_lineContainsSingal128, db(abs(fft(lineContainsSingal128(1:lx6/2)))));
+plot(x_lineContainsSingal128, x_lineContainsSingal128DbAbsFft(1:lx6/2));
+
+xlabel("Frequency [HZ]");
+ylabel("abs(DFT) [db]");
 
 
+
+%Question 7:
+q7sig = [lineContainsSingal128, zeros(1,128)];
+lx7 = length(q7sig);
+xAxis7 = linspace(0,FS1/2,lx7/2);
+q7sigDbAbsFft = db(abs(fft(q7sig)));
+subplot(2,3,3);
+plot(xAxis7, q7sigDbAbsFft(1:lx7/2));
 
 xlabel('Frequency [HZ]');
 ylabel('abs(DFT) [db]');
 
+
+%Question 8.5
+lineContainsT =  floor(0.55*FS1/N) +1 ;
+figure(f2);
+
+subplot(2,3,4);
+plot(w3d,xSpectralMatdb(lineContainsT,:))
+xlabel("Frequency [HZ]");
+ylabel("abs(DFT) [db]");
+
+%Question 8.6
+
+
+
+%Question 8.7
 
 
 
