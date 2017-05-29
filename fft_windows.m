@@ -1,5 +1,10 @@
-function [x_dft] = fft_windows(x,N)
+function [ret_val] = fft_windows(x,N)
 
-x_mat=vec2mat(x,N);
+% calculate number of rows
+len = ceil(size(x,2) / N);
+% add zeros if size(x) isn't devided by len
+x(end+1 : len * N) = 0;
+out_mat = col2im(x, [1 1], [N len])';
 
-x_dft=(fft(x_mat.')).';
+
+ret_val=(fft(out_mat'))';

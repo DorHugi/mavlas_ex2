@@ -2,7 +2,7 @@
 
 
 clear all; close all ; clc;
-load("signal.mat");
+load('signal.mat');
 f1 = figure();
 f2 = figure();
 
@@ -17,9 +17,9 @@ x1 = linspace(0,FS1,Lx1);
 
 plot(x1(1:Lx1/2),mag2db(dft1(1:Lx1/2)));
 
-title("DFT of the given signal");
-xlabel("Frequency [HZ]");
-ylabel("abs(DFT) [db]");
+title('DFT of the given signal');
+xlabel('Frequency [HZ]');
+ylabel('abs(DFT) [db]');
 hold all;
 
 
@@ -66,8 +66,8 @@ figure(f2);
 
 subplot(2,3,1);
 plot(w3d,xSpectralMatdb(lineContainsT,:))
-xlabel("Frequency [HZ]");
-ylabel("abs(DFT) [db]");
+xlabel('Frequency [HZ]');
+ylabel('abs(DFT) [db]');
 
 
 %Question 6:
@@ -88,8 +88,8 @@ plot(x_lineContainsSingal128, db(abs(fft(lineContainsSingal128(1:lx6/2)))));
 
 
 
-xlabel("Frequency [HZ]");
-ylabel("abs(DFT) [db]");
+xlabel('Frequency [HZ]');
+ylabel('abs(DFT) [db]');
 
 
 
