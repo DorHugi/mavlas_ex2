@@ -17,6 +17,15 @@ x1 = linspace(0,FS1,Lx1);
 
 plot(x1(1:Lx1/2),mag2db(dft1(1:Lx1/2)));
 
+figure(4)
+subplot(3,1,1)
+plot(x1(1:Lx1/2),mag2db(dft1(1:Lx1/2)));
+title('DFT of the given signal');
+xlabel('Frequency [HZ]');
+ylabel('abs(DFT) [db]');
+grid on;
+hold all;
+
 title('DFT of the given signal');
 xlabel('Frequency [HZ]');
 ylabel('abs(DFT) [db]');
@@ -108,8 +117,8 @@ figure(f2);
 subplot(2,3,4);
 plot(w3d,xSpectralMatdb(lineContainsT,:))
 title('DFT t=0.55 interval');
-xlabel("Frequency [HZ]");
-ylabel("abs(DFT) [db]");
+xlabel('Frequency [HZ]');
+ylabel('abs(DFT) [db]');
 
 %Question 8.6
 
@@ -126,8 +135,8 @@ subplot(2,3,5);
 
 plot(x_lineContainsSingal128, lineContainsSingal128DbAbsFft_blackman(1:lx6/2));
 
-xlabel("Frequency [HZ]");
-ylabel("abs(DFT) [db]");
+xlabel('Frequency [HZ]');
+ylabel('abs(DFT) [db]');
 title('Truncated* blackman');
 
 
@@ -149,5 +158,50 @@ title('padded * blackman');
 
 
 
+%Question 12
+fil1=[1 1];
+fil2=[1 0 0 1];
+
+figure(3);
+subplot(1,2,1);
+zplane(fil1);
+title('filter 1');
+xlabel('Re');
+ylabel('Img');
+grid on;
+hold all;
 
 
+subplot(1,2,2);
+zplane(fil2);
+title('filter 2');
+xlabel('Re');
+ylabel('Img');
+grid on;
+hold off;
+
+%Question 12
+fil_1_extended=[1 1 , zeros([1,(length(x)-2)])];
+fil2_extended=[1 0 0 1 , zeros([1,(length(x)-4)])];
+fil1_dft=abs(fft(fil_1_extended));
+fil2_dft=abs(fft(fil2_extended));
+sig1_full = fil1_dft.*(abs(fft(x)));
+sig2_full = fil2_dft.*(abs(fft(x)));
+
+figure(4);
+subplot(3,1,2)
+plot(x1(1:Lx1/2),mag2db(sig1_full(1:Lx1/2)));
+title('DFT of the given signal');
+xlabel('Frequency [HZ]');
+ylabel('abs(DFT) [db]');
+grid on;
+hold all;
+
+figure(4);
+subplot(3,1,3)
+plot(x1(1:Lx1/2),mag2db(sig2_full(1:Lx1/2)));
+title('DFT of the given signal');
+xlabel('Frequency [HZ]');
+ylabel('abs(DFT) [db]');
+grid on;
+hold off;
